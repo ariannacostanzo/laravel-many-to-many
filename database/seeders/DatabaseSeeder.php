@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         
         // $this->call(ProjectSeeder::class);
-        $this->call(TypeSeeder::class);
+        $this->call([TypeSeeder::class, TechnologySeeder::class]);
         \App\Models\Project::factory(10)->create();
     }
 }

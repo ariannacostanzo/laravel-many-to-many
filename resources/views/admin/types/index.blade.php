@@ -28,11 +28,11 @@
     </thead>
     <tbody>
         @forelse ($types as $type)
-
             <tr>
                 <th scope="row">{{ $type->id }}</th>
                 <td>
-                    <span class="badge rounded-pill" style="background-color: {{$type->color}}">{{$type->label}}</span>
+                    <span class="badge rounded-pill "
+                        style="background-color: {{ $type->color }}">{{ $type->label }}</span>
                 </td>
                 <td>{{ $type->getDate($type->created_at) }}</td>
                 <td>{{ $type->getDate($type->updated_at) }}</td>
@@ -42,8 +42,9 @@
                                 class="fa-regular fa-eye"></i></a>
                         <a href="{{ route('admin.types.edit', $type->id) }}" class="btn btn-warning"><i
                                 class="fa-solid fa-pen"></i></a>
-                        
-                        <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" class="delete-form" data-bs-toggle="modal" data-bs-target="#delete-modal" data-type="{{$type->label}}">
+
+                        <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" class="delete-form"
+                            data-bs-toggle="modal" data-bs-target="#delete-modal" data-type="{{ $type->label }}">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button>
