@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
         
         // $this->call(ProjectSeeder::class);
         $this->call([TypeSeeder::class, TechnologySeeder::class]);
-        \App\Models\Project::factory(10)->create();
+        \App\Models\Project::factory(5)->create();
     }
 }

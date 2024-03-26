@@ -17,7 +17,8 @@
             <th scope="col">Titolo</th>
             <th scope="col">Creato</th>
             <th scope="col">Modificato</th>
-            <th scope="col">Tipo</th>
+            <th scope="col">Tipologie</th>
+            <th scope="col">Tecnologie</th>
             <th>
                 <div class="d-flex justify-content-end gap-3">
                     <a href="{{route('admin.projects.trash')}}" class="btn btn-secondary">
@@ -49,6 +50,13 @@
                     @else 
                         Nessuno
                     @endif
+                </td>
+                <td>
+                    @forelse($project->technologies as $tech)
+                    <span class="badge text-bg-{{$tech->color}}">{{$tech->label}}</span>
+                    @empty
+                    Nessuna
+                    @endforelse 
                 </td>
                 <td>
                     <div class="d-flex justify-content-end gap-3">
