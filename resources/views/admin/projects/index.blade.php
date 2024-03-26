@@ -21,7 +21,7 @@
             <th scope="col">Tecnologie</th>
             <th>
                 <div class="d-flex justify-content-end gap-3">
-                    <a href="{{route('admin.projects.trash')}}" class="btn btn-secondary">
+                    <a href="{{ route('admin.projects.trash') }}" class="btn btn-secondary">
                         <i class="fa-solid fa-trash-can me-2"></i>
                         Vedi Cestino
                     </a>
@@ -42,21 +42,21 @@
                 <td>{{ $project->getDate($project->created_at) }}</td>
                 <td>{{ $project->getDate($project->updated_at) }}</td>
                 <td>
-                    @if($project->type)
-                        <span class="badge rounded-pill" style="background-color: {{$project->type->color}}">
+                    @if ($project->type)
+                        <span class="badge rounded-pill" style="background-color: {{ $project->type->color }}">
                             {{-- <a href="{{route('admin.types.show', $project->type->id)}}"></a> --}}
-                            {{$project->type->label}}
+                            {{ $project->type->label }}
                         </span>
-                    @else 
+                    @else
                         Nessuno
                     @endif
                 </td>
                 <td>
                     @forelse($project->technologies as $tech)
-                    <span class="badge text-bg-{{$tech->color}}">{{$tech->label}}</span>
+                        <span class="badge text-bg-{{ $tech->color }}">{{ $tech->label }}</span>
                     @empty
-                    Nessuna
-                    @endforelse 
+                        Nessuna
+                    @endforelse
                 </td>
                 <td>
                     <div class="d-flex justify-content-end gap-3">
@@ -64,8 +64,10 @@
                                 class="fa-regular fa-eye"></i></a>
                         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning"><i
                                 class="fa-solid fa-pen"></i></a>
-                        
-                        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="delete-form" data-bs-toggle="modal" data-bs-target="#delete-modal" data-project="{{$project->title}}">
+
+                        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
+                            class="delete-form" data-bs-toggle="modal" data-bs-target="#delete-modal"
+                            data-project="{{ $project->title }}">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button>
@@ -73,7 +75,7 @@
 
                     </div>
                 </td>
-                
+
             </tr>
         @empty
             <tr>

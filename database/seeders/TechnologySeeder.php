@@ -21,7 +21,7 @@ class TechnologySeeder extends Seeder
             ['label' => 'Vue', 'color' => 'success'],
             ['label' => 'SQL', 'color' => 'secondary'],
             ['label' => 'php', 'color' => 'info'],
-            ['label' => 'Laravel', 'color' => 'danger-subtle'],
+            ['label' => 'Laravel', 'color' => 'danger'],
         ];
 
         foreach($technologies as $tech)
