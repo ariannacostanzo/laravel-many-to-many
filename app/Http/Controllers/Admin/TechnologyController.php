@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Technology;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TechnologyController extends Controller
 {
@@ -65,7 +66,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view('admin.technologies.edit', compact('technology'));
     }
 
     /**
@@ -73,7 +74,23 @@ class TechnologyController extends Controller
      */
     public function update(Request $request, Technology $technology)
     {
-        //
+        $request->validate([
+            'label' =>
+            ['required', 'string', Rule::unique('technologies')->ignore($technology->id)],
+            'color' => 'nullable|string',
+
+        ], [
+            'label.required' => 'Inserisci l\'etichetta della tecnologia',
+            'color.string' => 'Il formato del colore non è corretto',
+
+        ]);
+
+        $data = $request->all();
+        $technology->update($data);
+
+        return to_route('admin.technologies.show', $technology->id)
+            ->with('message', "Tecnologia '$technology->label' modificata con successo!")
+            ->with('type', "info");
     }
 
     /**
@@ -81,6 +98,11 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+        return to_route('admin.technologies.index')
+        ->with('message', "Tecnologia '$technology->label' eliminata con successo!")
+        ->with('type', "danger");
     }
 }
+
+// todo cestino

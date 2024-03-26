@@ -2,7 +2,7 @@
 
 @section('content')
 
-@section('title', "Tecnologia $technology->label")
+@section('title', "Tecnology $technology->label")
 
 @include('includes.projects.modal')
 

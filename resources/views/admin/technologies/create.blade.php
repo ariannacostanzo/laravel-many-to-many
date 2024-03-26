@@ -2,7 +2,7 @@
 
 @section('content')
 
-@section('title', 'Edit Technology')
+@section('title', 'Create Technology')
 
 <h1>Crea una nuova tecnologia</h1>
 <hr>
