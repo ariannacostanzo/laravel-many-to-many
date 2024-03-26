@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -33,7 +34,8 @@ class ProjectController extends Controller
     {
         $project = new Project();
         $types = Type::select('label', 'id')->get();
-        return view('admin.projects.create', compact('project', 'types'));
+        $technologies = Technology::select('label', 'id')->get();
+        return view('admin.projects.create', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -46,13 +48,17 @@ class ProjectController extends Controller
             'title' => 'required|string|unique:projects',
             'description' => 'required|string',
             'image' => 'nullable|image',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id'
         ], [
             'title.required' => 'Inserisci il titolo del progetto',
             'description.required' => 'Inserisci la descrizione del progetto',
             'image.image' => 'Il formato immagine non è corretto',
-            'type_id.exist' => 'Il tipo non è corretto',
+            'type_id.exists' => 'La tipologia non è valida',
+            'technologies.exists' => 'Le tecnologie scelte non sono valide',
         ]);
+
+        
 
         $data = $request->all();
 
@@ -92,7 +98,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::select('label', 'id')->get();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::select('label', 'id')->get();
+        $previous_techs = $project->technologies->pluck('id')->toArray();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies', 'previous_techs'));
     }
 
     /**
@@ -104,12 +112,14 @@ class ProjectController extends Controller
             'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id)],
             'description' => 'required|string',
             'image' => 'nullable|image',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id'
         ], [
             'title.required' => 'Inserisci il titolo del progetto',
             'description.required' => 'Inserisci la descrizione del progetto',
             'image.url' => 'Il formato immagine non è corretto',
-            'type_id.exist' => 'Il tipo non è corretto',
+            'type_id.exists' => 'La tipologia non è valida',
+            'technologies.exists' => 'Le tecnologie non sono valide',
         ]);
 
         $data = $request->all();

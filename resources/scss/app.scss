@@ -22,7 +22,11 @@ body {
 }
 
 .badge {
-    padding: 10px;
+    padding: 5px;
+
+    &.rounded-pill {
+        padding: 10px;
+    }
 }
 
 .display-color {

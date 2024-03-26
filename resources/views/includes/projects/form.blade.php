@@ -40,10 +40,12 @@
     </div>
     <div class="col-6">
         <label for="type_id" class="form-label">Tipo</label>
-        <select class="form-select @error('type_id') is-invalid @elseif(old('type_id', '')) is-valid @enderror" name="type_id">
-            <option value="" @if(old('type_id', $project->type?->id) == '') selected @endif>Nessuno</option>
+        <select class="form-select @error('type_id') is-invalid @elseif(old('type_id', '')) is-valid @enderror"
+            name="type_id">
+            <option value="" @if (old('type_id', $project->type?->id) == '') selected @endif>Nessuno</option>
             @foreach ($types as $type)
-            <option value="{{$type->id}}" @if(old('type_id', $project->type?->id) == $type->id) selected @endif>{{$type->label}}</option>
+                <option value="{{ $type->id }}" @if (old('type_id', $project->type?->id) == $type->id) selected @endif>
+                    {{ $type->label }}</option>
             @endforeach
         </select>
         @error('type_id')
@@ -79,6 +81,21 @@
             <img src=" {{ old('image', $project->image) ? $project->getImagePath() : 'https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg' }}"
                 id="preview" class="img-fluid">
         </div>
+    </div>
+    <div class="col-12">
+        @foreach ($technologies as $tech)
+            <div class="form-check form-check-inline @error('technologies') is-invalid @enderror">
+                <input class="form-check-input" name="technologies[]" 
+                type="checkbox" id="tech-{{$tech->id}}" value="{{$tech->id}}"
+                @if(in_array($tech->id, old('technologies', $previous_techs ?? []))) checked @endif>
+                <label class="form-check-label" for="tech-{{$tech->id}}">{{$tech->label}}</label>
+            </div>
+        @endforeach
+            @error('technologies')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
     </div>
     <div class="col-6"></div>
     <div class="col-6 d-flex justify-content-end">
