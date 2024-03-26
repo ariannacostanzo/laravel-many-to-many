@@ -182,6 +182,7 @@ class ProjectController extends Controller
 
     public function drop(Project $project)
     {
+        if ($project->has('technologies')) $project->technologies()->detach();
         if ($project->image) Storage::delete($project->image);
         $project->forceDelete();
         return to_route('admin.projects.trash')

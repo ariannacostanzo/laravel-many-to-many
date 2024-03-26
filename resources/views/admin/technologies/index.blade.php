@@ -2,12 +2,12 @@
 
 @section('content')
 
-@section('title', 'Type')
+@section('title', 'Technologies')
 
 {{-- modal  --}}
 @include('includes.projects.modal')
 
-<h1>Tipologie</h1>
+<h1>Tecnologie</h1>
 <hr>
 <table class="table table-hover table-striped">
     <thead>
@@ -18,7 +18,7 @@
             <th scope="col">Modificato</th>
             <th>
                 <div class="d-flex justify-content-end gap-3">
-                    <a href="{{ route('admin.types.create') }}" class="btn btn-success">
+                    <a href="{{ route('admin.technologies.create') }}" class="btn btn-success">
                         <i class="fa-solid fa-plus me-2"></i>
                         Crea nuovo
                     </a>
@@ -27,24 +27,23 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($types as $type)
+        @forelse ($technologies as $tech)
             <tr>
-                <th scope="row">{{ $type->id }}</th>
+                <th scope="row">{{ $tech->id }}</th>
                 <td>
-                    <span class="badge rounded-pill "
-                        style="background-color: {{ $type->color }}">{{ $type->label }}</span>
+                    <span class="badge text-bg-{{$tech->color}}">{{ $tech->label }}</span>
                 </td>
-                <td>{{ $type->getDate($type->created_at) }}</td>
-                <td>{{ $type->getDate($type->updated_at) }}</td>
+                <td>{{ $tech->getDate($tech->created_at) }}</td>
+                <td>{{ $tech->getDate($tech->updated_at) }}</td>
                 <td>
                     <div class="d-flex justify-content-end gap-3">
-                        <a href="{{ route('admin.types.show', $type->id) }}" class="btn btn-primary"><i
+                        <a href="{{ route('admin.technologies.show', $tech->id) }}" class="btn btn-primary"><i
                                 class="fa-regular fa-eye"></i></a>
-                        <a href="{{ route('admin.types.edit', $type->id) }}" class="btn btn-warning"><i
+                        <a href="{{ route('admin.technologies.edit', $tech->id) }}" class="btn btn-warning"><i
                                 class="fa-solid fa-pen"></i></a>
 
-                        <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" class="delete-form"
-                            data-bs-toggle="modal" data-bs-target="#delete-modal" data-type="{{ $type->label }}">
+                        <form action="{{ route('admin.technologies.destroy', $tech->id) }}" method="POST" class="delete-form"
+                            data-bs-toggle="modal" data-bs-target="#delete-modal" data-type="{{ $tech->label }}">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button>

@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,8 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('/projects', AdminProjectController::class)->withTrashed();
     //rotte resource types
     Route::resource('/types', TypeController::class);
+    //rotte resource technologies
+    Route::resource('/technologies', TechnologyController::class);
 });
 
 
