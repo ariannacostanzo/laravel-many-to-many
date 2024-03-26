@@ -78,6 +78,11 @@ class ProjectController extends Controller
         
         $project->save();
 
+        if(Arr::exists($data, 'technologies')) 
+        {
+            $project->technologies()->attach($data['technologies']);
+        }
+
         return to_route('admin.projects.show', $project->id)
             ->with('message', "Progetto '$project->title' creato con successo!")
             ->with('type', "success");
@@ -136,6 +141,14 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+
+        //se ho inviato qualche checkbox sincronizzo i valori con project
+        if (Arr::exists($data, 'technologies')) {
+            $project->technologies()->sync($data['technologies']);
+            //se invece non ho checkbox inviati e il progetto ne aveva allora significa che li devo togliere tutti
+        } elseif (!Arr::exists($data, 'technologies') && $project->has('technologies')) {
+            $project->technologies()->detach();
+        }
 
         return to_route('admin.projects.show', $project->id)
             ->with('message', "Progetto '$project->title' modificato con successo!")
