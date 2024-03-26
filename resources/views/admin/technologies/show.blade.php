@@ -15,7 +15,11 @@
         <strong>
             Colore: 
         </strong>
-        <div class="p-2 rounded display-color bg-{{$technology->color}}" ></div>
+        @if(Str::startsWith($technology->color, '#'))
+            <div class="p-2 rounded display-color" style="background-color: {{$technology->color}}"></div>
+        @else 
+            <div class="p-2 rounded display-color bg-{{$technology->color}}" ></div>
+        @endif
     </div>
 </div>
 <div class="row my-5">

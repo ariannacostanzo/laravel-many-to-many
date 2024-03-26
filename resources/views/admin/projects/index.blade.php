@@ -53,7 +53,7 @@
                 </td>
                 <td>
                     @forelse($project->technologies as $tech)
-                        <span class="badge text-bg-{{ $tech->color }}">{{ $tech->label }}</span>
+                        <span class="badge" style="background-color: {{ $tech->color }}" >{{ $tech->label }}</span>
                     @empty
                         Nessuna
                     @endforelse

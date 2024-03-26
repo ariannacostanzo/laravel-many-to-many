@@ -31,7 +31,11 @@
             <tr>
                 <th scope="row">{{ $tech->id }}</th>
                 <td>
-                    <span class="badge text-bg-{{$tech->color}}">{{ $tech->label }}</span>
+                    @if(Str::startsWith($tech->color, '#'))
+                        <span class="badge" style="background-color: {{$tech->color}}">{{ $tech->label }}</span>
+                    @else 
+                        <span class="badge text-bg-{{$tech->color}}">{{ $tech->label }}</span>
+                    @endif
                 </td>
                 <td>{{ $tech->getDate($tech->created_at) }}</td>
                 <td>{{ $tech->getDate($tech->updated_at) }}</td>

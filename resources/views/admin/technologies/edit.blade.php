@@ -18,12 +18,12 @@
         </div>
         <div class="col-2">
             <label for="color" class="form-label">Colore</label>
-            <input type="text"
+            <input type="color"
                 class="form-control @error('color') is-invalid @elseif(old('color', '')) is-valid  @enderror"
-                id="color" name="color" value="{{ old('color', $technology->color) }}">
+                id="color" name="color"  value="{{ old('color', $technology->color) }}">
         </div>
         <div class="col d-flex justify-content-end gap-3">
-                <a class="btn btn-primary" href="{{route('admin.technologies.show', $technology->id)}}"><i class="fa-solid fa-arrow-left me-2"></i>Torna indietro</a>
+                <a class="btn btn-primary" href="{{route('admin.technologies.index')}}"><i class="fa-solid fa-arrow-left me-2"></i>Torna indietro</a>
                 <button class="btn btn-success"><i class="fa-solid fa-floppy-disk me-2"></i>Salva</button>
         </div>
     </div>

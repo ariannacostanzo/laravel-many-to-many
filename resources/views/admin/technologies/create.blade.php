@@ -23,9 +23,9 @@
         </div>
         <div class="col-2">
             <label for="color" class="form-label">Colore</label>
-            <input type="text"
+            <input type="color"
                 class="form-control @error('color') is-invalid @elseif(old('color', '')) is-valid  @enderror"
-                id="color" name="color" value="{{ old('color') }}">
+                id="color" name="color" placeholder="#f6f456" value="{{ old('color') }}">
             @error('color')
                 <div class="invalid-feedback">
                     {{ $message }}
