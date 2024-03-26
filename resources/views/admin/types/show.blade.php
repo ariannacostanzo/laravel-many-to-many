@@ -2,7 +2,7 @@
 
 @section('content')
 
-@section('title', "Tipo $type->label")
+@section('title', "Tipologia $type->label")
 
 @include('includes.projects.modal')
 

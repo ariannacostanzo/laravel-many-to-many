@@ -22,7 +22,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create');
     }
 
     /**
@@ -30,7 +30,26 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'label' => 'required|string|unique:technologies',
+            'color' => 'nullable|string',
+
+        ], [
+            'label.required' => 'Inserisci l\'etichetta della tecnologia',
+            'color.string' => 'Il formato del colore non è corretto',
+
+        ]);
+
+        $data = $request->all();
+
+        $technology = new Technology();
+
+        $technology->fill($data);
+        $technology->save();
+
+        return to_route('admin.technologies.show', $technology->id)
+            ->with('message', "Tipo '$technology->label' creato con successo!")
+            ->with('type', "success");
     }
 
     /**
@@ -38,7 +57,7 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        //
+        return view('admin.technologies.show', compact('technology'));
     }
 
     /**

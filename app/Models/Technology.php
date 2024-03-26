@@ -11,6 +11,8 @@ class Technology extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['label', 'color'];
+    
     //lego technology a projects
     public function projects()
     {

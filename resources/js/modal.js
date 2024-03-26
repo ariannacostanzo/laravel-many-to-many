@@ -11,11 +11,15 @@ deleteForms.forEach((form) => {
         e.preventDefault()
         const projectTitle = form.getAttribute('data-project')
         const typeLabel = form.getAttribute('data-type')
+        const technologyLabel = form.getAttribute('data-technology')
         if (projectTitle) {
             modalText.innerText = projectTitle + "?";
         }
         if (typeLabel) {
             modalText.innerText = typeLabel + '?';
+        }
+        if (technologyLabel) {
+            modalText.innerText = technologyLabel + "?";
         }
         modalConfirmButton.addEventListener("click", () => { //e questo si toglie
             form.submit();
