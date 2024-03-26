@@ -20,6 +20,12 @@ class Project extends Model
         return $this->belongsTo(Type::class);
     }
 
+    //lego projects a technology 
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class);
+    }
+
     public function getAbstract() {
         $abstract = substr($this->description, 0, 50) . '...';
         return $abstract;
